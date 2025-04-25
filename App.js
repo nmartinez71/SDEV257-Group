@@ -26,7 +26,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="The Movie App" component={Home} />
+        <Stack.Screen name="The Movie App" component={Home} /> {/* Change the "name= "The Movie App"" to name = "Home" if it brings up errors */}
         <Stack.Screen name="Movies" component={Movies} />
       </Stack.Navigator>
     </NavigationContainer>
