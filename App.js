@@ -25,8 +25,8 @@ const headerText = "MOVIES DATABASE"
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="The Movie App" component={Home} /> {/* Change the "name= "The Movie App"" to name = "Home" if it brings up errors */}
+      <Stack.Navigator initialRouteName="The Movie App">
+        <Stack.Screen name="The Movie App" component={Home} />
         <Stack.Screen name="Movies" component={Movies} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -38,7 +38,8 @@ function Home ({navigation}) {
     <View style={styles.container}>
       <ImageBackground style={styles.bgImage} source={require('./img/movieBGImage.jpg')}>
         <View style={styles.padContent}>
-          <Text style={styles.topHeaderText}>{headerText.split(' ').join('\n')}</Text> {/* The split and join code makes a new line for every word in the string */}
+          <Text style={styles.topHeaderText}>{headerText.split(' ').join('\n')}</Text> 
+          {/* The split and join code makes a new line for every word in the string */}
         </View>
       </ImageBackground>
   
