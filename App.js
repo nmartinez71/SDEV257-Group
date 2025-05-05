@@ -16,6 +16,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Image, ImageBackground } from
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Movies from './screens/Movies';
+import Actors from './screens/Actors';
 
 const Stack = createStackNavigator();
 
@@ -25,9 +26,10 @@ const headerText = "MOVIES DATABASE"
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="The Movie App">
-        <Stack.Screen name="The Movie App" component={Home} />
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Movies" component={Movies} />
+        <Stack.Screen name="Actors" component={Actors} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -39,7 +41,6 @@ function Home ({navigation}) {
       <ImageBackground style={styles.bgImage} source={require('./img/movieBGImage.jpg')}>
         <View style={styles.padContent}>
           <Text style={styles.topHeaderText}>{headerText.split(' ').join('\n')}</Text> 
-          {/* The split and join code makes a new line for every word in the string */}
         </View>
       </ImageBackground>
   
@@ -49,7 +50,7 @@ function Home ({navigation}) {
           <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Movies')}>
             <Text style={{ fontSize: 20 }}>🎬 MOVIES</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Movies')}>
+          <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Actors')}>
             <Text style={{ fontSize: 20 }}>🎬 ACTORS</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Movies')}>
