@@ -16,6 +16,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Image, ImageBackground } from
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Movies from './screens/Movies';
+import TestAPI from './screens/TestAPI';
 
 const Stack = createStackNavigator();
 
@@ -26,8 +27,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="The Movie App" component={Home} /> {/* Change the "name= "The Movie App"" to name = "Home" if it brings up errors */}
+        <Stack.Screen name="Home" component={Home} /> 
         <Stack.Screen name="Movies" component={Movies} />
+        <Stack.Screen name="TestAPI" component={TestAPI} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -38,11 +40,11 @@ function Home ({navigation}) {
     <View style={styles.container}>
       <ImageBackground style={styles.bgImage} source={require('./img/movieBGImage.jpg')}>
         <View style={styles.padContent}>
-          <Text style={styles.topHeaderText}>{headerText.split(' ').join('\n')}</Text> {/* The split and join code makes a new line for every word in the string */}
+          <Text style={styles.topHeaderText}>{headerText.split(' ').join('\n')}</Text>
         </View>
       </ImageBackground>
   
-
+    
       <View style={styles.content}>
         <View style={styles.topBox}>
           <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Movies')}>
@@ -53,6 +55,9 @@ function Home ({navigation}) {
           </TouchableOpacity>
           <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Movies')}>
             <Text style={{ fontSize: 20 }}>🎬 DIRECTORS</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('TestAPI')}>
+            <Text style={{ fontSize: 20 }}>API TESTING</Text>
           </TouchableOpacity>
         </View>
       </View>
