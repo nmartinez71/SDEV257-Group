@@ -16,7 +16,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Image, ImageBackground } from
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Movies from './screens/Movies';
-import TestAPI from './screens/TestAPI';
+import Actors from './screens/Actors';
 
 const Stack = createStackNavigator();
 
@@ -27,9 +27,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} /> 
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Movies" component={Movies} />
-        <Stack.Screen name="TestAPI" component={TestAPI} />
+        <Stack.Screen name="Actors" component={Actors} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -40,7 +40,7 @@ function Home ({navigation}) {
     <View style={styles.container}>
       <ImageBackground style={styles.bgImage} source={require('./img/movieBGImage.jpg')}>
         <View style={styles.padContent}>
-          <Text style={styles.topHeaderText}>{headerText.split(' ').join('\n')}</Text>
+          <Text style={styles.topHeaderText}>{headerText.split(' ').join('\n')}</Text> 
         </View>
       </ImageBackground>
   
@@ -50,7 +50,7 @@ function Home ({navigation}) {
           <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Movies')}>
             <Text style={{ fontSize: 20 }}>🎬 MOVIES</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Movies')}>
+          <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Actors')}>
             <Text style={{ fontSize: 20 }}>🎬 ACTORS</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Movies')}>
