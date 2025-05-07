@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Image, TextInput } from "react-native";
+import { getActors } from "../API/ActorAPI"; // Import your new API function
 
-const TMDB_API_KEY = "0c73625e289bd4fecc5eddb87dc73df2"; // Replace with your TMDB API Key
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w200";
 
 export default function Actors() {
@@ -10,13 +10,12 @@ export default function Actors() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/person/popular?api_key=${TMDB_API_KEY}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setActors(data.results);
-        setFilteredActors(data.results);
-      })
-      .catch((err) => console.error("API fetch failed", err));
+    const fetchActors = async () => {
+      const data = await getActors();
+      setActors(data);
+      setFilteredActors(data);
+    };
+    fetchActors();
   }, []);
 
   useEffect(() => {
@@ -32,9 +31,8 @@ export default function Actors() {
         style={styles.searchInput}
         placeholder="Search actor"
         value={searchTerm}
-        onChangeText={(text) => setSearchTerm(text)}
-      /> 
-
+        onChangeText={setSearchTerm}
+      />
       <ScrollView>
         {filteredActors.map((actor) => (
           <View key={actor.id} style={styles.actorCard}>
@@ -43,7 +41,6 @@ export default function Actors() {
               style={styles.image}
             />
             <Text style={styles.name}>{actor.name}</Text>
-            
           </View>
         ))}
       </ScrollView>

@@ -1,26 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TouchableOpacity, View, Image, ImageBackground } from 'react-native';
-import { ScrollView } from "react-native-gesture-handler";
-
+import { StyleSheet, Text, TouchableOpacity, View, Image, TextInput, ScrollView } from 'react-native';
+import { getMovies } from '../API/MovieAPI';
 
 export default function Movies() {
-  const [ movies, setMovies ] = useState(["Placeholder 1", "Placeholder 2", "Placeholder 3", "Placeholder 4"]);
+  const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetch = async () => {
+      const results = await getMovies();
+      setMovies(results);
+      setFilteredMovies(results);
+    };
+    fetch();
+  }, []);
+
+  useEffect(() => {
+    const filtered = movies.filter(movie =>
+      movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredMovies(filtered);
+  }, [searchTerm]);
 
   return (
     <View>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search movie"
+          value={searchTerm}
+          onChangeText={setSearchTerm}
+        />
       <ScrollView >
 
       {
-        movies.map((item, index) => {
+        filteredMovies.map((movie, index) => {
           return (
-          <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+            <TouchableOpacity key={movie.id} onPress={() => completeTask(index)}>
             {/* REPLACE image, title, and text with the actual image, title, and description pulled from the API */}
-            <Item 
-            key={index} 
-            image={require('../img/movieBGImage.jpg')}
-            title={"PLACEHOLDER TITLE"} 
-            text={item} 
+            <Item
+              image={{ uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` }}
+              title={movie.title}
+              text={movie.overview}
             />
             </TouchableOpacity>
             )
@@ -35,16 +57,16 @@ export default function Movies() {
   );
 }
 
-function Item (props) {
+function Item({ image, title, text }) {
   return (
     <View style={styles.itemContainer}>
-      <Image style={styles.image} source={props.image}/>
-      <View style={{ width: 228 }} >
-        <Text style={{ fontSize: 20 }}>{props.title}</Text>
-        <Text style={{ fontSize: 15 }}>{props.text}</Text>
+      <Image style={styles.image} source={image} />
+      <View style={{ width: 228 }}>
+        <Text style={{ fontSize: 20 }}>{title}</Text>
+        <Text style={{ fontSize: 15 }} numberOfLines={3}>{text}</Text>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -54,6 +76,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     padding: 20,
+  },
+  searchInput: {
+    height: 40,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    margin: 12,
   },
   itemContainer: {
     flex: 1,

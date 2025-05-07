@@ -17,6 +17,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Movies from './screens/Movies';
 import Actors from './screens/Actors';
+import TestAPI from './screens/TestAPI';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Movies" component={Movies} />
         <Stack.Screen name="Actors" component={Actors} />
+        <Stack.Screen name="TestAPI" component={TestAPI} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -56,9 +58,7 @@ function Home ({navigation}) {
           <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Movies')}>
             <Text style={{ fontSize: 20 }}>🎬 DIRECTORS</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('TestAPI')}>
-            <Text style={{ fontSize: 20 }}>API TESTING</Text>
-          </TouchableOpacity>
+
         </View>
       </View>
 
