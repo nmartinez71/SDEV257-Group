@@ -55,9 +55,6 @@ function Home ({navigation}) {
           <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Actors')}>
             <Text style={{ fontSize: 20 }}>🎬 ACTORS</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.padContent} onPress={() => navigation.navigate('Movies')}>
-            <Text style={{ fontSize: 20 }}>🎬 DIRECTORS</Text>
-          </TouchableOpacity>
 
         </View>
       </View>
